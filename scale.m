@@ -44,13 +44,13 @@ function media_cor = MediaRed(linha, coluna)
 
 	soma = zeros(1);
 	for p = -d:d
-		lin = TransLinha(linha) + p;
+		lin = linha + p;
 		for q = -d:d
-			col = TransColuna(coluna) + q;
+			col = coluna + q;
 			if (lin > 0 && col > 0 && lin <= m && col <= n)
 				soma = soma + I(lin, col);
 			else
-				soma = soma + I(lin-p, col-q);
+				soma = soma + I(linha, coluna);
 			endif
 		endfor
 	endfor
@@ -59,11 +59,13 @@ function media_cor = MediaRed(linha, coluna)
 endfunction
 
 for i = 1:m_star
+	i_cur = TransLinha(i);
 	for j = 1:n_star
+		j_cur = TransColuna(j);
 		if (k < 1)
-			I_star(i, j) = MediaRed(i, j);
+			I_star(i, j) = MediaRed(i_cur, j_cur);
 		else
-			I_star(i, j) = I(TransLinha(i), TransColuna(j));
+			I_star(i, j) = I(i_cur, j_cur);
 		endif
 	endfor
 endfor
